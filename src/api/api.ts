@@ -1,27 +1,33 @@
-import {request} from "./request";
+import { request } from "./request";
 
-interface Good {
-    categoryTypeId: string
-    id: string;
-    label: string;
-    description: string;
-    img: string;
-    price: string
+export interface Good {
+  categoryTypeId?: string;
+  id: string;
+  label: string;
+  description?: string;
+  img: string;
+  price: string;
 }
-interface Categories{
-    id: string;
-    label: string;
-    type: string
+export interface Category {
+  id: string;
+  type: string;
+  label: string;
 }
 export function getGoods(): Promise<{ items: Good[]; total: number }> {
-        return request('api/goods', {params: {}})
-    }
-
-export function getCategories(): Promise<{ categories: Categories[] }> {
-    return request('api/categories', {params: {}})
+  return request("goods");
 }
-export function getPopularCategories(): Promise<{ items: Good[]; category: Categories }[]> {
-    return request('api/popular_categories', {params: {}})
+
+export function getCategories(): Promise<{ categories: Category[] }> {
+  return request("categories");
+}
+export function getPopularCategories(): Promise<
+  { items: Good[]; category: Category }[]
+> {
+  return request("popular_categories");
+}
+
+export function getGoodsByCategory(categoryTypeId:string):Promise<{ items: Good[]; total: number }>{
+  return request('goods',({ params: {categoryTypeIds:`${categoryTypeId}`}}))
 }
 // export function getCart(): Promise<{ items: Good[]; total: number }> {
 //     return request('api/cart', {params: {}})
@@ -40,8 +46,3 @@ export function getPopularCategories(): Promise<{ items: Good[]; category: Categ
 // export function deleteGood(): Promise<{ items: Good[]; total: number }> {
 //     return request('api/cart', {params: {}})
 // }
-
-
-
-
-

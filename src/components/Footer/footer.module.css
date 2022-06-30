@@ -1,12 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
-
-* {
-  font-family: Roboto;
-}
 
 .footerdistributed {
+  margin-top: auto;
   background: linear-gradient(to right, lightblue, lightcoral);
-
   box-sizing: border-box;
   width: 100%;
   text-align: left;

@@ -21,7 +21,7 @@ export const Header: React.FC = () => {
 
         title={
           <Link to="/" style={{ color: "#ffffff" }}>
-            BlaBla-shop
+            Bla-Bla shop
           </Link>
         }
         extra={[
@@ -41,7 +41,6 @@ export const Header: React.FC = () => {
           <MenuApp />,
         ]}
       />
-      <Divider/>
     </div>
   );
 };

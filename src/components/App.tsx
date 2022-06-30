@@ -10,6 +10,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 // @ts-ignore
 import style from "./app.module.css";
+import { CardPage } from "./CardPage/CardPage";
 
 export function App() {
   useEffect(() => {}, []);
@@ -22,7 +23,7 @@ export function App() {
             <Routes>
               <Route path="/" element={<MainPage />} />
               {/*<Route path="/registration" element={<RegistrationForm />} />*/}
-
+              <Route path={"/goods/:CardId"} element={<CardPage />} />
               <Route path="/category/:idCategory" element={<CategoryPage />} />
               <Route path="/goods" element={<GoodsPage />} />
             </Routes>

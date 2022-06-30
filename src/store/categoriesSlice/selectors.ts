@@ -26,9 +26,5 @@ export const getTransformCategory = (state: rootStore) => {
   const mapCategories = getCategories(state);
 
   const { categories } = mapCategories;
-
-  return categories.map((item) => ({
-    ...item,
-    // Icon: icon.find(({ idIcon }) => idIcon === item.id)?.icon,
-  }));
+  return categories
 };

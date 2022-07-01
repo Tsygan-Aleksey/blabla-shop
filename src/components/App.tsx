@@ -11,6 +11,7 @@ import { Footer } from "./Footer";
 // @ts-ignore
 import style from "./app.module.css";
 import { CardPage } from "./CardPage/CardPage";
+import {Cart} from "./Cart/Cart";
 
 export function App() {
   useEffect(() => {}, []);
@@ -26,6 +27,7 @@ export function App() {
               <Route path={"/goods/:CardId"} element={<CardPage />} />
               <Route path="/category/:idCategory" element={<CategoryPage />} />
               <Route path="/goods" element={<GoodsPage />} />
+              <Route path="/cart" element={<Cart />} />
             </Routes>
           </Col>
         </Row>

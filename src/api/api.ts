@@ -23,7 +23,13 @@ interface GoodsSearch {
   limit: number; // количество возвращаемых товаров, по умолчанию 20
   offset: number; // смещение относительно начала.
   sortBy: keyof Good; // по какому полю бек сортирует товары, по умолчанию по id
-  sortDirection: 'asc' | 'desc'; // как сортировать asc - по возрастанию desc - по убыванию, по умолчанию asc
+  sortDirection: "asc" | "desc"; // как сортировать asc - по возрастанию desc - по убыванию, по умолчанию asc
+}
+
+export interface GoodInCart {
+  good: Good;
+  count: number; // кол-во товаров в корзине
+  id: string; // id товара
 }
 
 export function getGoods(): Promise<{ items: Good[]; total: number }> {
@@ -39,22 +45,33 @@ export function getPopularCategories(): Promise<
   return request("popular_categories");
 }
 
-export function getGoodsByCategory(categoryTypeId: GoodsSearch["categoryTypeIds"] ):Promise<{ items: Good[]; total: number }>{
-  return request('goods',({ params: {categoryTypeIds:`${categoryTypeId}`}}))
+export function getGoodsByCategory(
+  categoryTypeId: GoodsSearch["categoryTypeIds"]
+): Promise<{ items: Good[]; total: number }> {
+  return request("goods", { params: { categoryTypeIds: `${categoryTypeId}` } });
 }
 
-
-export function getGoodById(id: GoodsSearch['ids']):Promise<{ items: Good[]; total: number }>{
-  return request('goods',({params: {ids: id}}))
-
+export function getGoodById(
+  id: GoodsSearch["ids"]
+): Promise<{ items: Good[]; total: number }> {
+  return request("goods", { params: { ids: id } });
 }
-// export function getCart(): Promise<{ items: Good[]; total: number }> {
-//     return request('api/cart', {params: {}})
-// }
-//
-// export function putCart(): Promise<{ items: Good[]; total: number }> {
-//     return request('api/cart', {params: {}})
-// }
+export function getCart(): Promise<GoodInCart> {
+  return request("cart");
+}
+
+export function putCart(
+  item: GoodInCart["good"],
+  count: GoodInCart["count"],
+  id: GoodInCart["id"]
+): Promise<GoodInCart> {
+  const requestOptions = {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ good: item, count: count, id }),
+  };
+  return request("cart", { requestOptions });
+}
 // export function deleteCart(): Promise<{ items: Good[]; total: number }> {
 //     return request('api/cart', {params: {}})
 // }

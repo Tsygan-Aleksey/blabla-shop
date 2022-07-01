@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -6,13 +6,22 @@ import {
   ShoppingCartOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { PageHeader, Divider, Badge } from "antd";
+import { PageHeader, Badge } from "antd";
 
 import { MenuApp } from "components/Menu";
 // @ts-ignore
 import style from "./header.module.css"
+import {useDispatch, useSelector} from "react-redux";
+
+import { selectorsCart, actionsCart } from "store/cartSlice";
+import {AppDispatch} from "store/store";
 
 export const Header: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const {count} = useSelector(selectorsCart.getCart);
+  useEffect(() => {
+    dispatch(actionsCart.fetchCart());
+  }, []);
   return (
     <div  className={style.header}>
       <PageHeader
@@ -32,7 +41,7 @@ export const Header: React.FC = () => {
           <Link to="/cart" >
             <Badge
               size="small"
-              count={1}
+              count={count}
               style={{ backgroundColor: "#0139c7" }}
             >
               <ShoppingCartOutlined style={{ fontSize: "30px",color: "#ffffff"}} />

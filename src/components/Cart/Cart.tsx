@@ -5,7 +5,7 @@ import { AppDispatch } from "../../store/store";
 import { selectorsCart, actionsCart } from "store/cartSlice";
 import { Button, Image, Space, Table } from "antd";
 
-import { GoodInCart } from "../../api/api";
+import {GoodInCart, putCart} from "../../api/api";
 import { Link } from "react-router-dom";
 
 export const Cart = () => {
@@ -46,13 +46,19 @@ export const Cart = () => {
       title: "Количество",
       dataIndex: ["good", "label"],
       key: "id",
-      render: (_: unknown, record: { count: GoodInCart['count'] }) => {
+      render: (_: unknown, record: { count: GoodInCart['count'], good: GoodInCart['good'] }) => {
         return (
 
           <Space>
             {record.count}
-            <Button>+</Button>
-            <Button>-</Button>
+            <Button onClick={()=>{putCart(record.good, record.count + 1, record.good.id)
+              setTimeout(()=>{
+                dispatch(actionsCart.fetchCart())
+              },100)}}>+</Button>
+            <Button onClick={()=>{putCart(record.good, record.count - 1, record.good.id)
+              setTimeout(()=>{
+                dispatch(actionsCart.fetchCart())
+              },200)}}>-</Button>
           </Space>
         );
       },

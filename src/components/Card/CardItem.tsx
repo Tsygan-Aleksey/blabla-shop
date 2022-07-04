@@ -50,10 +50,10 @@ export const CardItem: React.FC<Good> = ({
           <Button
             onClick={(event) => {
               putCart(
-                { img, price, label, id, categoryTypeId, description },
-                count,
-                id
-              ).then();
+                  {img, price, label, id, categoryTypeId, description},
+                  count,
+                  id
+              );
               setTimeout(()=>{
                   dispatch(actionsCart.fetchCart())
               },100)

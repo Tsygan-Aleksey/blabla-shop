@@ -1,26 +1,26 @@
 import { LOAD_STATUSES } from "../../constants";
-import { rootStore } from "../store";
+import { RootStore } from "../store";
 import { State } from "./slice";
 import { getCategories } from "store/categoriesSlice/selectors";
 
-export const getCategorySlice = (state: rootStore): State => state.category;
-export const getLoadStatus = (state: rootStore): LOAD_STATUSES =>
+export const getCategorySlice = (state: RootStore): State => state.category;
+export const getLoadStatus = (state: RootStore): LOAD_STATUSES =>
   getCategorySlice(state).loadStatus;
 
-export const getCategory = (state: rootStore) =>
+export const getCategory = (state: RootStore) =>
   getCategorySlice(state).category;
 
-export const isLoadingSeleсtor = (state: rootStore) => {
+export const isLoadingSeleсtor = (state: RootStore) => {
   return getLoadStatus(state) === LOAD_STATUSES.LOADING;
 };
-export const isLoadedSeleсtor = (state: rootStore) => {
+export const isLoadedSeleсtor = (state: RootStore) => {
   return getLoadStatus(state) === LOAD_STATUSES.LOADED;
 };
-export const isErrorSeleсtor = (state: rootStore) => {
+export const isErrorSeleсtor = (state: RootStore) => {
   return getLoadStatus(state) === LOAD_STATUSES.ERROR;
 };
 
-export const getTransformCategory = (state: rootStore) => {
+export const getTransformCategory = (state: RootStore) => {
   const category = getCategory(state);
   const mapCategories = getCategories(state);
   const { items } = category;

@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch } from "../../store/store";
 import { selectorsCart, actionsCart } from "store/cartSlice";
-import { Button, Image, Space, Table } from "antd";
+import { Button, Divider, Image, Space, Table } from "antd";
 
-import {GoodInCart, putCart} from "../../api/api";
+import { GoodInCart, putCart } from "../../api/api";
 import { Link } from "react-router-dom";
 
 export const Cart = () => {
@@ -38,7 +38,7 @@ export const Cart = () => {
       title: "Товар",
       dataIndex: "label",
       key: "",
-      render: (label: string, record: {id: string}) => {
+      render: (label: string, record: { id: string }) => {
         return <Link to={`/goods/${record.id}`}>{label}</Link>;
       },
     },
@@ -46,19 +46,37 @@ export const Cart = () => {
       title: "Количество",
       dataIndex: ["good", "label"],
       key: "id",
-      render: (_: unknown, record: { count: GoodInCart['count'], good: GoodInCart['good'] }) => {
+      render: (
+        _: unknown,
+        record: { count: GoodInCart["count"]; good: GoodInCart["good"] }
+      ) => {
         return (
-
           <Space>
             {record.count}
-            <Button onClick={()=>{putCart(record.good, record.count + 1, record.good.id)
-              setTimeout(()=>{
-                dispatch(actionsCart.fetchCart())
-              },100)}}>+</Button>
-            <Button onClick={()=>{putCart(record.good, record.count - 1, record.good.id)
-              setTimeout(()=>{
-                dispatch(actionsCart.fetchCart())
-              },200)}}>-</Button>
+            <Button
+              onClick={() => {
+                dispatch(
+                  actionsCart.addToCart({
+                    good: record.good,
+                    count: record.count + 1,
+                  })
+                );
+              }}
+            >
+              +
+            </Button>
+            <Button
+              onClick={() => {
+                dispatch(
+                  actionsCart.addToCart({
+                    good: record.good,
+                    count: record.count - 1,
+                  })
+                );
+              }}
+            >
+              -
+            </Button>
           </Space>
         );
       },
@@ -72,15 +90,24 @@ export const Cart = () => {
       title: "",
       dataIndex: "id",
       key: "id",
-      render: (id: string) => {
+      render: (id: string, record: { good: GoodInCart["good"] }) => {
         return (
-          <Button
-            onClick={() => {
-              console.log(id);
-            }}
-          >
-            Купить
-          </Button>
+          <>
+            <Button onClick={() => {}}>Купить</Button>
+            <Divider />
+            <Button
+              onClick={() => {
+                dispatch(
+                  actionsCart.addToCart({
+                    good: record.good,
+                    count: 0,
+                  })
+                );
+              }}
+            >
+              Удалить
+            </Button>
+          </>
         );
       },
     },

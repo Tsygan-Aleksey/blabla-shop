@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useRef, useState } from "react";
 import { Button, Card, Space } from "antd";
-import { Good, putCart } from "../../api/api";
+import { Good } from "../../api/api";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {actionsCart} from "../../store/cartSlice";
 import {AppDispatch} from "../../store/store";
 
@@ -49,14 +49,8 @@ export const CardItem: React.FC<Good> = ({
           </Button>
           <Button
             onClick={(event) => {
-              putCart(
-                  {img, price, label, id, categoryTypeId, description},
-                  count,
-                  id
-              );
-              setTimeout(()=>{
-                  dispatch(actionsCart.fetchCart())
-              },100)
+              dispatch(actionsCart.addToCart({good:{img, price, label, id, categoryTypeId, description}, count},
+              ));
             }}
           >
             <ShoppingCartOutlined ref={cartRef} style={{ color: "#000000" }} />

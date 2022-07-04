@@ -1,26 +1,26 @@
 import { LOAD_STATUSES } from "../../constants";
-import { rootStore } from "../store";
+import { RootStore } from "../store";
 
 import { getCategories } from "store/categoriesSlice/selectors";
 import { Good } from "../../api/api";
 import { State } from "./slice";
 
-export const getGoodsSlice = (state: rootStore): State => state.goods;
-export const getLoadStatus = (state: rootStore): LOAD_STATUSES =>
+export const getGoodsSlice = (state: RootStore): State => state.goods;
+export const getLoadStatus = (state: RootStore): LOAD_STATUSES =>
   getGoodsSlice(state).loadStatus;
-export const getGoods = (state: rootStore) => getGoodsSlice(state).goods;
+export const getGoods = (state: RootStore) => getGoodsSlice(state).goods;
 
-export const getIsLoadingSelector = (state: rootStore) => {
+export const getIsLoadingSelector = (state: RootStore) => {
   return getLoadStatus(state) === LOAD_STATUSES.LOADING;
 };
-export const getIsLoadedSelector = (state: rootStore) => {
+export const getIsLoadedSelector = (state: RootStore) => {
   return getLoadStatus(state) === LOAD_STATUSES.LOADED;
 };
-export const getIsErrorSelector = (state: rootStore) => {
+export const getIsErrorSelector = (state: RootStore) => {
   return getLoadStatus(state) === LOAD_STATUSES.ERROR;
 };
 
-export const getMapGoods = (state: rootStore) => {
+export const getMapGoods = (state: RootStore) => {
   const goods = getGoods(state);
   const Categories = getCategories(state);
   const { items } = goods;

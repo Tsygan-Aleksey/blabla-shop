@@ -1,24 +1,24 @@
 import { LOAD_STATUSES } from "../../constants";
-import { rootStore } from "../store";
+import { RootStore } from "../store";
 import { State } from "./slice";
 
-export const getPopularCategoriesSlice = (state: rootStore): State =>
+export const getPopularCategoriesSlice = (state: RootStore): State =>
   state.popularCategories;
 
-export const getLoadStatus = (state: rootStore): LOAD_STATUSES =>
+export const getLoadStatus = (state: RootStore): LOAD_STATUSES =>
   getPopularCategoriesSlice(state).loadStatus;
 
-export const getPopularCategories = (state: rootStore) =>
+export const getPopularCategories = (state: RootStore) =>
   getPopularCategoriesSlice(state).popularCategories;
 
-export const getIsLoadingSelector = (state: rootStore) => {
+export const getIsLoadingSelector = (state: RootStore) => {
   return getLoadStatus(state) === LOAD_STATUSES.LOADING;
 };
 
-export const getIsLoadedSelector = (state: rootStore) => {
+export const getIsLoadedSelector = (state: RootStore) => {
   return getLoadStatus(state) === LOAD_STATUSES.LOADED;
 };
 
-export const getIsErrorSelector = (state: rootStore) => {
+export const getIsErrorSelector = (state: RootStore) => {
   return getLoadStatus(state) === LOAD_STATUSES.ERROR;
 };

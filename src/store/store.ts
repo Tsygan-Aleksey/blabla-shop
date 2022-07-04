@@ -19,4 +19,4 @@ export const store = configureStore({
 });
 
 export type AppDispatch = typeof store.dispatch;
-export type rootStore = ReturnType<typeof rootReducer>;
+export type RootStore = ReturnType<typeof rootReducer>;

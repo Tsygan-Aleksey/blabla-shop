@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { LOAD_STATUSES } from "../../constants";
-import { getCart, GoodInCart } from "api/api";
+import {getCart, Good, GoodInCart, putCart} from "api/api";
+import {getGoodById, getGoodsInCart} from "./selectors";
+import {AppDispatch, RootStore} from "../store";
+
 
 export interface State {
   cart: GoodInCart[];
@@ -8,16 +11,25 @@ export interface State {
 }
 
 const initialState: State = {
-  cart: [
-  ],
+  cart: [],
   loadStatus: LOAD_STATUSES.UNKNOWN,
 };
 
 const fetchCart = createAsyncThunk("cart/getCart", getCart);
-
+const addToCart = createAsyncThunk<void, { good: Good, count: number },{state:RootStore,dispatch:AppDispatch}>(
+    "cart/addToCart",
+    async ({good, count}, { getState, dispatch }) => {
+      // const goodInCart = getGoodById(good.id)(getState());
+      await putCart(good, count, good.id);
+      dispatch(fetchCart());
+    }
+);
 export const actions = {
   fetchCart,
+  addToCart,
 };
+
+
 
 export const { reducer } = createSlice({
   name: "cart",
@@ -30,7 +42,7 @@ export const { reducer } = createSlice({
     builder.addCase(fetchCart.rejected, (state) => {
       state.loadStatus = LOAD_STATUSES.ERROR;
     });
-    builder.addCase(fetchCart.fulfilled, (state, action ) => {
+    builder.addCase(fetchCart.fulfilled, (state, action) => {
       state.cart = action.payload;
       state.loadStatus = LOAD_STATUSES.LOADED;
     });

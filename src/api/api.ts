@@ -56,6 +56,11 @@ export function getGoodById(
 ): Promise<{ items: Good[]; total: number }> {
   return request("goods", { params: { ids: id } });
 }
+export function getGoodsByTitle(
+  value: string
+): Promise<{ items: Good[]; total: number }> {
+  return request("goods", { params: { text: value } });
+}
 export function getCart(): Promise<GoodInCart[]> {
   return request("cart");
 }
@@ -72,7 +77,4 @@ export function putCart(
   };
   return request("cart", { requestOptions });
 }
-// export function deleteCart(): Promise<{ items: Good[]; total: number }> {
-//     return request('api/cart', {params: {}})
-// }
-//
+

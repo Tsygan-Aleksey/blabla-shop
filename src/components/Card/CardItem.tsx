@@ -1,5 +1,5 @@
 import React, {  useRef, useState } from "react";
-import { Button, Card, Space } from "antd";
+import {Button, Card, Image, Space} from "antd";
 import { Good } from "../../api/api";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ export const CardItem: React.FC<Good> = ({
     <Card
       hoverable
       style={{ width: 240 }}
-      cover={<img alt="example" src={img} />}
+      cover={<Image alt="example" src={img} />}
       extra={
         <Space>
           <Button

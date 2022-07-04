@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch } from "../../store/store";
 import { selectorsCart, actionsCart } from "store/cartSlice";
 import { Button, Divider, Image, Space, Table } from "antd";
 
-import { GoodInCart, putCart } from "../../api/api";
+import { GoodInCart } from "../../api/api";
 import { Link } from "react-router-dom";
+
 
 export const Cart = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -114,10 +115,11 @@ export const Cart = () => {
   ];
   useEffect(() => {
     dispatch(actionsCart.fetchCart());
-    console.log(cart);
   }, []);
 
-  return (
-    <Table dataSource={editedCart} columns={columns} pagination={false}></Table>
-  );
+  return (<>
+      {editedCart.length > 0 && <Table dataSource={editedCart} columns={columns} pagination={false}></Table>}
+      {editedCart.length === 0 && <h1>'Пока ничего нет!'</h1>}
+
+  </>)
 };

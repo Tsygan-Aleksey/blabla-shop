@@ -3,23 +3,13 @@ import { LOAD_STATUSES } from "../../constants";
 import { getCart, GoodInCart } from "api/api";
 
 export interface State {
-  cart: GoodInCart;
+  cart: GoodInCart[];
   loadStatus: LOAD_STATUSES;
 }
 
 const initialState: State = {
-  cart: {
-    good: {
-      price: "",
-      id: "",
-      label: "",
-      img: "",
-      description: '',
-      categoryTypeId: ''
-    },
-    count: 0,
-    id: "",
-  },
+  cart: [
+  ],
   loadStatus: LOAD_STATUSES.UNKNOWN,
 };
 
@@ -40,7 +30,7 @@ export const { reducer } = createSlice({
     builder.addCase(fetchCart.rejected, (state) => {
       state.loadStatus = LOAD_STATUSES.ERROR;
     });
-    builder.addCase(fetchCart.fulfilled, (state, action) => {
+    builder.addCase(fetchCart.fulfilled, (state, action ) => {
       state.cart = action.payload;
       state.loadStatus = LOAD_STATUSES.LOADED;
     });

@@ -6,7 +6,7 @@ export const getCartSlice = (state: rootStore): State => state.cart;
 export const getLoadStatus = (state: rootStore): LOAD_STATUSES =>
     getCartSlice(state).loadStatus;
 
-export const getCart = (state: rootStore) =>
+export const getGoodsInCart = (state: rootStore) =>
     getCartSlice(state).cart;
 
 export const getIsLoadingSelector = (state: rootStore) => {

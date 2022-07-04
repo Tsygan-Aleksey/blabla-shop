@@ -18,7 +18,7 @@ import {AppDispatch} from "store/store";
 
 export const Header: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const {count} = useSelector(selectorsCart.getCart);
+  const cart = useSelector(selectorsCart.getGoodsInCart);
   useEffect(() => {
     dispatch(actionsCart.fetchCart());
   }, []);
@@ -41,7 +41,7 @@ export const Header: React.FC = () => {
           <Link to="/cart" >
             <Badge
               size="small"
-              count={count}
+              count={cart.length}
               style={{ backgroundColor: "#0139c7" }}
             >
               <ShoppingCartOutlined style={{ fontSize: "30px",color: "#ffffff"}} />

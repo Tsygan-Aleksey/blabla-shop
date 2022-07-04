@@ -1,10 +1,10 @@
 import { request } from "./request";
 
 export interface Good {
-  categoryTypeId?: string;
+  categoryTypeId: string;
   id: string;
   label: string;
-  description?: string;
+  description: string;
   img: string;
   price: string;
 }
@@ -28,7 +28,7 @@ interface GoodsSearch {
 
 export interface GoodInCart {
   good: Good;
-  count: number; // кол-во товаров в корзине
+  count: number; // кол-во товара в корзине
   id: string; // id товара
 }
 
@@ -56,7 +56,7 @@ export function getGoodById(
 ): Promise<{ items: Good[]; total: number }> {
   return request("goods", { params: { ids: id } });
 }
-export function getCart(): Promise<GoodInCart> {
+export function getCart(): Promise<GoodInCart[]> {
   return request("cart");
 }
 
@@ -76,9 +76,3 @@ export function putCart(
 //     return request('api/cart', {params: {}})
 // }
 //
-// export function postGood(): Promise<{ items: Good[]; total: number }> {
-//     return request('api/cart', {params: {}})
-// }
-// export function deleteGood(): Promise<{ items: Good[]; total: number }> {
-//     return request('api/cart', {params: {}})
-// }

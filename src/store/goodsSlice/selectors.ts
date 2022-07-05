@@ -23,13 +23,14 @@ export const getIsErrorSelector = (state: RootStore) => {
 export const getMapGoods = (state: RootStore) => {
   const goods = getGoods(state);
   const Categories = getCategories(state);
-  const { items } = goods;
+  const { items, total} = goods;
   const { categories } = Categories;
 
-  return items.map((item: Good) => ({
+  const filteredItems =  items.map((item: Good) => ({
     ...item,
     categoryLabel:
       categories.find(({ id }) => id === item.categoryTypeId)?.label ??
       "Неизвестная категория",
   }));
+  return {items: filteredItems, total}
 };

@@ -37,7 +37,7 @@ export const SearchInput: React.FC = () => {
     <Row style={{ whiteSpace: "nowrap" }}>
       {
         <div className={style.search}>
-          <Input onChange={onInputHandler} placeholder={"search"} />
+          <Input onChange={onInputHandler} placeholder={"поиск"} />
 
           {visible && (
             <List

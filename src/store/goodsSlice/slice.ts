@@ -1,6 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { LOAD_STATUSES } from "../../constants";
-import { Good, getGoods } from "api/api";
+import {
+  Good,
+  getGoods,
+  putCart,
+  GoodsSearch,
+  getGoodsByParams,
+} from "api/api";
+import { AppDispatch, RootStore } from "../store";
 
 export interface State {
   goods: { items: Good[]; total: number };
@@ -15,10 +22,10 @@ const initialState: State = {
   loadStatus: LOAD_STATUSES.UNKNOWN,
 };
 
-const fetchGoods = createAsyncThunk("goods/fetchGoods", getGoods);
+const fetchGoods = createAsyncThunk("goods/fetchGoods", getGoodsByParams);
 
 export const actions = {
-    fetchGoods: fetchGoods,
+  fetchGoods,
 };
 
 export const { reducer } = createSlice({
@@ -38,5 +45,3 @@ export const { reducer } = createSlice({
     });
   },
 });
-
-

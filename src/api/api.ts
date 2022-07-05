@@ -14,16 +14,16 @@ export interface Category {
   label: string;
 }
 
-interface GoodsSearch {
-  ids: string; // выбрать по id, exmaple ids=1,2,3
-  categoryTypeIds: string; // выбрать по id категория, example categoryTypeIds=1,2,3
-  minPrice: number; // выбрать с ценой не более максимально указанной
-  maxPrice: number; // выбрать с ценой не менее минимально указанной
-  text: string; // выбрать по содержанию указанной подстроки в названии
-  limit: number; // количество возвращаемых товаров, по умолчанию 20
-  offset: number; // смещение относительно начала.
-  sortBy: keyof Good; // по какому полю бек сортирует товары, по умолчанию по id
-  sortDirection: "asc" | "desc"; // как сортировать asc - по возрастанию desc - по убыванию, по умолчанию asc
+export interface GoodsSearch {
+  ids?: string; // выбрать по id, exmaple ids=1,2,3
+  categoryTypeIds?: string; // выбрать по id категория, example categoryTypeIds=1,2,3
+  minPrice?: number; // выбрать с ценой не более максимально указанной
+  maxPrice?: number; // выбрать с ценой не менее минимально указанной
+  text?: string; // выбрать по содержанию указанной подстроки в названии
+  limit?: number; // количество возвращаемых товаров, по умолчанию 20
+  offset?: number; // смещение относительно начала.
+  sortBy?: keyof Good; // по какому полю бек сортирует товары, по умолчанию по id
+  sortDirection?: "asc" | "desc"; // как сортировать asc - по возрастанию desc - по убыванию, по умолчанию asc
 }
 
 export interface GoodInCart {
@@ -60,6 +60,11 @@ export function getGoodsByTitle(
   value: string
 ): Promise<{ items: Good[]; total: number }> {
   return request("goods", { params: { text: value } });
+}
+export function getGoodsByParams(
+    params: GoodsSearch = {}
+): Promise<{ items: Good[]; total: number }> {
+  return request("goods", { params: params });
 }
 export function getCart(): Promise<GoodInCart[]> {
   return request("cart");

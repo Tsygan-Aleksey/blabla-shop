@@ -1,13 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { LOAD_STATUSES } from "../../constants";
-import {
-  Good,
-  getGoods,
-  putCart,
-  GoodsSearch,
-  getGoodsByParams,
-} from "api/api";
-import { AppDispatch, RootStore } from "../store";
+import { Good, getGoodsByParams } from "api/api";
 
 export interface State {
   goods: { items: Good[]; total: number };

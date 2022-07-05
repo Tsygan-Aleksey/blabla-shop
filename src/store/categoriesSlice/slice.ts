@@ -9,13 +9,7 @@ export interface State {
 
 const initialState: State = {
   categories: {
-    categories: [
-      {
-        id: "",
-        type: "",
-        label: "",
-      },
-    ],
+    categories: [],
   },
   loadStatus: LOAD_STATUSES.UNKNOWN,
 };

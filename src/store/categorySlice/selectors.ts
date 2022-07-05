@@ -2,6 +2,7 @@ import { LOAD_STATUSES } from "../../constants";
 import { RootStore } from "store";
 import { State } from "./slice";
 import { getCategories } from "store/categoriesSlice/selectors";
+import {Good} from "../../api/api";
 
 export const getCategorySlice = (state: RootStore): State => state.category;
 export const getLoadStatus = (state: RootStore): LOAD_STATUSES =>
@@ -10,13 +11,13 @@ export const getLoadStatus = (state: RootStore): LOAD_STATUSES =>
 export const getCategory = (state: RootStore) =>
   getCategorySlice(state).category;
 
-export const isLoadingSeleсtor = (state: RootStore) => {
+export const isLoadingSeleсtor = (state: RootStore): Boolean => {
   return getLoadStatus(state) === LOAD_STATUSES.LOADING;
 };
-export const isLoadedSeleсtor = (state: RootStore) => {
+export const isLoadedSeleсtor = (state: RootStore): Boolean => {
   return getLoadStatus(state) === LOAD_STATUSES.LOADED;
 };
-export const isErrorSeleсtor = (state: RootStore) => {
+export const isErrorSeleсtor = (state: RootStore): Boolean => {
   return getLoadStatus(state) === LOAD_STATUSES.ERROR;
 };
 

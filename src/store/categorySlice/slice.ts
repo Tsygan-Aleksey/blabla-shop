@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { LOAD_STATUSES } from "../../constants";
-import {getGoodsByCategory, Good} from "api/api";
+import { getGoodsByCategory, Good } from "api/api";
 
 export interface State {
   category: { items: Good[]; total: number };
@@ -9,16 +9,7 @@ export interface State {
 }
 const initialState: State = {
   category: {
-    items: [
-      {
-        categoryTypeId: "",
-        id: "",
-        img: "",
-        label: "",
-        price: "",
-        description: "",
-      },
-    ],
+    items: [],
     total: 0,
   },
   loadStatus: LOAD_STATUSES.UNKNOWN,
@@ -29,7 +20,7 @@ const fetchCategory = createAsyncThunk(
   getGoodsByCategory
 );
 
-export const actions = {
+export const actionsCategory = {
   fetchCategory,
 };
 

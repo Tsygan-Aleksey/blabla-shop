@@ -2,16 +2,12 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { Divider, List } from "antd";
+import { actionsCategory, categorySelectors } from "store/categorySlice";
+import { AppDispatch } from "store/store";
 
-import { actions, categorySelectors } from "store/categorySlice";
-import { AppDispatch } from "../../store/store";
-
-import { CardItem } from "../Card";
 import { Loader } from "../Loader";
 import { ErrorToast } from "components/ErrorToast";
-import {isLoadedSeleсtor} from "../../store/categorySlice/selectors";
-import {ContainerWithCards} from "../ContainerWithCards";
+import { ContainerWithCards } from "../ContainerWithCards";
 
 export const CategoryPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,7 +20,7 @@ export const CategoryPage: React.FC = () => {
   const loaded = useSelector(categorySelectors.isLoadedSeleсtor);
 
   useEffect(() => {
-    dispatch(actions.fetchCategory(idCategory));
+    dispatch(actionsCategory.fetchCategory(idCategory));
   }, [idCategory]);
 
   return (
@@ -32,12 +28,16 @@ export const CategoryPage: React.FC = () => {
       {loading && <Loader />}
       {error && <ErrorToast />}
 
-      {loaded && <ContainerWithCards category={{
-        label: category[0].categoryLabel,
-        id: category[0].categoryTypeId!,
-        type: ''
-      }} items={category}/>
-      }
+      {loaded && (
+        <ContainerWithCards
+          category={{
+            label: category[0].categoryLabel,
+            id: category[0].categoryTypeId!,
+            type: "",
+          }}
+          items={category}
+        />
+      )}
     </>
   );
 };

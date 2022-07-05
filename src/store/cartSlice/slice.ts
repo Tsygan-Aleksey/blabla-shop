@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { LOAD_STATUSES } from "../../constants";
 import {getCart, Good, GoodInCart, putCart} from "api/api";
-import {getGoodById, getGoodsInCart} from "./selectors";
 import {AppDispatch, RootStore} from "../store";
 
 

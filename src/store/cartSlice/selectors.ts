@@ -1,29 +1,23 @@
 import { LOAD_STATUSES } from "../../constants";
-import { RootStore } from "../store";
+import { RootStore } from "store";
 import { State } from "./slice";
+import { GoodInCart } from "api/api";
 
 export const getCartSlice = (state: RootStore): State => state.cart;
 export const getLoadStatus = (state: RootStore): LOAD_STATUSES =>
-    getCartSlice(state).loadStatus;
+  getCartSlice(state).loadStatus;
 
-export const getGoodsInCart = (state: RootStore) =>
-    getCartSlice(state).cart;
+export const getGoodsInCart = (state: RootStore): GoodInCart[] =>
+  getCartSlice(state).cart;
 
-export const getGoodById = (cartId : string) => (
-    state: RootStore
-) => {
-  return getGoodsInCart(state).find(({id}) => cartId === id);
-};
-
-export const getIsLoadingSelector = (state: RootStore) => {
+export const getIsLoadingSelector = (state: RootStore): Boolean => {
   return getLoadStatus(state) === LOAD_STATUSES.LOADING;
 };
 
-export const getIsLoadedSelector = (state: RootStore) => {
+export const getIsLoadedSelector = (state: RootStore): Boolean => {
   return getLoadStatus(state) === LOAD_STATUSES.LOADED;
 };
 
-export const getIsErrorSelector = (state: RootStore) => {
+export const getIsErrorSelector = (state: RootStore): Boolean => {
   return getLoadStatus(state) === LOAD_STATUSES.ERROR;
 };
-

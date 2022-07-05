@@ -1,3 +1,3 @@
-export {actions} from './slice'
+
 export * as GoodSelectors from './selectors'
-export {reducer} from './slice'
+export {reducer, actions as goodActions} from './slice'

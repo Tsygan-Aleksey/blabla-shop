@@ -62,7 +62,7 @@ export function getGoodsByTitle(
   return request("goods", { params: { text: value } });
 }
 export function getGoodsByParams(
-    params: GoodsSearch = {}
+  params: GoodsSearch = {}
 ): Promise<{ items: Good[]; total: number }> {
   return request("goods", { params: params });
 }
@@ -82,4 +82,14 @@ export function putCart(
   };
   return request("cart", { requestOptions });
 }
-
+export function postLogin(
+  login: string,
+  password: string,
+): Promise<{ user: { login: string; password: string; id: string } }> {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ login: login, password: password }),
+  };
+  return request("cart", { requestOptions });
+}

@@ -1,5 +1,5 @@
 import { LOAD_STATUSES } from "../../constants";
-import { RootStore } from "../store";
+import { RootStore } from "store";
 import { State } from "./slice";
 import { getCategories } from "store/categoriesSlice/selectors";
 

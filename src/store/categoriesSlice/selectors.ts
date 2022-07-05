@@ -1,7 +1,6 @@
 import { LOAD_STATUSES } from "../../constants";
 import { RootStore } from "../store";
 import { State } from "./slice";
-// import { icon } from "components/Menu";
 
 export const getCategoriesSlice = (state: RootStore): State => state.categories;
 export const getLoadStatusSlice = (state: RootStore): LOAD_STATUSES =>
@@ -26,5 +25,5 @@ export const getTransformCategory = (state: RootStore) => {
   const mapCategories = getCategories(state);
 
   const { categories } = mapCategories;
-  return categories
+  return categories;
 };

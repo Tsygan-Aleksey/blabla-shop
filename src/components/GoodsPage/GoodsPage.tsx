@@ -1,10 +1,10 @@
 import React, {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Table, Image, TableProps, Divider } from "antd";
+import {Table, Image, TableProps, Divider, InputNumber, Input} from "antd";
 
-import { AppDispatch } from "../../store/store";
-import { actions, GoodSelectors } from "store/goodsSlice";
+import { AppDispatch } from "store/store";
+import { goodActions, GoodSelectors } from "store/goodsSlice";
 import { actionsCategories } from "store/categoriesSlice";
 import { Link } from "react-router-dom";
 import { selectorsCategories } from "store/categoriesSlice";
@@ -14,6 +14,7 @@ import Search from "antd/es/input/Search";
 
 import { Loader } from "../Loader";
 import { ErrorToast } from "../ErrorToast";
+import { debounce } from "lodash";
 
 export const GoodsPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -30,7 +31,7 @@ export const GoodsPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(actions.fetchGoods(params));
+    dispatch(goodActions.fetchGoods(params));
   }, [params]);
 
   const onSearch = () => {
@@ -46,7 +47,7 @@ export const GoodsPage: React.FC = () => {
     sorter: { [key: string]: any }
   ) => {
     setParams((prevState) => {
-      let newState = prevState;
+      let newState = { ...prevState };
       if (filters.categoryTypeId !== null) {
         newState = {
           ...newState,
@@ -110,6 +111,7 @@ export const GoodsPage: React.FC = () => {
         return <Link to={`/goods/${record.id}`}>{label}</Link>;
       },
       filterSearch: true,
+      sorter: true,
     },
     {
       title: "Описание",
@@ -117,10 +119,54 @@ export const GoodsPage: React.FC = () => {
       key: "id",
     },
     {
-      title: "Цена",
+      title: "Сортировать по цене",
       dataIndex: "price",
       key: "id",
       sorter: true,
+    },
+    {
+      title: () => {
+        return (
+          <div>
+            <Input
+              defaultValue={params.maxPrice}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                if(e.target.value){
+                  setParams((prevState)=>{
+                    return {...prevState,
+                      maxPrice: Number(e.target.value)
+                    }})
+                }
+                else if(!e.target.value) setParams((prevState)=>{
+                  let newState = {...prevState}
+                  delete newState.maxPrice
+                  return newState
+                })
+              }}
+              placeholder="Макс. Цена"
+            ></Input>
+            <Input
+                defaultValue={params.minPrice}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  if(e.target.value){
+                    setParams((prevState)=>{
+                      return {...prevState,
+                        minPrice: Number(e.target.value)
+                      }})
+                  }
+                   else if(!e.target.value) setParams((prevState)=>{
+                     let newState = {...prevState}
+                     delete newState.minPrice
+                    return newState
+                  })
+              }}
+              placeholder="Мин. Цена"
+            ></Input>
+          </div>
+        );
+      },
+      dataIndex: "",
+      key: "id",
     },
     {
       title: "Изображение",

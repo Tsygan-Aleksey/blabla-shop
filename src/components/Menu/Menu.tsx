@@ -6,7 +6,7 @@ import { Menu, Button, Drawer } from "antd";
 import { MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import MenuItem from "antd/lib/menu/MenuItem";
 
-import { AppDispatch } from "../../store/store";
+import { AppDispatch } from "store";
 import { actionsCategories, selectorsCategories } from "store/categoriesSlice";
 
 // @ts-ignore

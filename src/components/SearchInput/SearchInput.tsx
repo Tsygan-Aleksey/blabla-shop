@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { getGoodsByTitle, Good } from "../../api/api";
+import { getGoodsByTitle, Good } from "api/api";
 import { debounce } from "lodash";
 import { Button, Input, List, Row } from "antd";
 
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // @ts-ignore
 import style from "./SearchInput.module.css";

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { AppDispatch } from "../../store/store";
+import { AppDispatch } from "store/store";
 import { selectorsCart, actionsCart } from "store/cartSlice";
 import { Button, Divider, Image, Space, Table } from "antd";
 
-import { GoodInCart } from "../../api/api";
+import { GoodInCart } from "api/api";
 import { Link } from "react-router-dom";
 
 

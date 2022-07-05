@@ -1,20 +1,19 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {Table, Image, TableProps, Divider, InputNumber, Input} from "antd";
+import { Table, Image, TableProps, Divider, Input } from "antd";
 
-import { AppDispatch } from "store/store";
+import { AppDispatch } from "store";
 import { goodActions, GoodSelectors } from "store/goodsSlice";
 import { actionsCategories } from "store/categoriesSlice";
 import { Link } from "react-router-dom";
 import { selectorsCategories } from "store/categoriesSlice";
 import { ColumnsType } from "antd/es/table";
-import { Good, GoodsSearch } from "../../api/api";
+import { Good, GoodsSearch } from "api/api";
 import Search from "antd/es/input/Search";
 
 import { Loader } from "../Loader";
 import { ErrorToast } from "../ErrorToast";
-import { debounce } from "lodash";
 
 export const GoodsPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -131,34 +130,32 @@ export const GoodsPage: React.FC = () => {
             <Input
               defaultValue={params.maxPrice}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                if(e.target.value){
-                  setParams((prevState)=>{
-                    return {...prevState,
-                      maxPrice: Number(e.target.value)
-                    }})
-                }
-                else if(!e.target.value) setParams((prevState)=>{
-                  let newState = {...prevState}
-                  delete newState.maxPrice
-                  return newState
-                })
+                if (e.target.value) {
+                  setParams((prevState) => {
+                    return { ...prevState, maxPrice: Number(e.target.value) };
+                  });
+                } else if (!e.target.value)
+                  setParams((prevState) => {
+                    let newState = { ...prevState };
+                    delete newState.maxPrice;
+                    return newState;
+                  });
               }}
               placeholder="Макс. Цена"
             ></Input>
             <Input
-                defaultValue={params.minPrice}
+              defaultValue={params.minPrice}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  if(e.target.value){
-                    setParams((prevState)=>{
-                      return {...prevState,
-                        minPrice: Number(e.target.value)
-                      }})
-                  }
-                   else if(!e.target.value) setParams((prevState)=>{
-                     let newState = {...prevState}
-                     delete newState.minPrice
-                    return newState
-                  })
+                if (e.target.value) {
+                  setParams((prevState) => {
+                    return { ...prevState, minPrice: Number(e.target.value) };
+                  });
+                } else if (!e.target.value)
+                  setParams((prevState) => {
+                    let newState = { ...prevState };
+                    delete newState.minPrice;
+                    return newState;
+                  });
               }}
               placeholder="Мин. Цена"
             ></Input>
@@ -194,7 +191,7 @@ export const GoodsPage: React.FC = () => {
       <Table
         pagination={{
           pageSizeOptions: [10, 15, 20, 25],
-          total: goods.total,
+          total: Number(goods.total),
           onChange: (currentPage, pageSize) => {
             setParams((prevState) => {
               return {

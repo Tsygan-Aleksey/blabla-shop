@@ -4,8 +4,7 @@ import { getGoodById, Good } from "../../api/api";
 import { Col, Row, Image, Button, Space } from "antd";
 import { actionsCart } from "store/cartSlice";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store/store";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { AppDispatch } from "store/store";
 
 export const CardPage: React.FC = () => {
   const { CardId } = useParams() as { CardId: string };
@@ -44,21 +43,22 @@ export const CardPage: React.FC = () => {
                 setCount((prevState) => {
                   if (prevState === 1) {
                     return prevState;
-                  }  return prevState - 1;
+                  }
+                  return prevState - 1;
                 });
               }}
             >
               -
             </Button>
-              <Button type="primary"
-                  onClick={(event) => {
-                      dispatch(actionsCart.addToCart( {good: good.items[0], count} ));
-                  }}
-              >
-                  Добавить в корзину
-              </Button>
+            <Button
+              type="primary"
+              onClick={() => {
+                dispatch(actionsCart.addToCart({ good: good.items[0], count }));
+              }}
+            >
+              Добавить в корзину
+            </Button>
           </Space>
-
         </Col>
       </Row>
     </>

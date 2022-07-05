@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import {PageHeader, Badge, Input} from "antd";
+import {PageHeader, Badge} from "antd";
 
 import { MenuApp } from "components/Menu";
 // @ts-ignore

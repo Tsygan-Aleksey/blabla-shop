@@ -1,11 +1,11 @@
 import React, {  useRef, useState } from "react";
 import {Button, Card, Image, Space} from "antd";
-import { Good } from "../../api/api";
+import { Good } from "api/api";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {actionsCart} from "../../store/cartSlice";
-import {AppDispatch} from "../../store/store";
+import {actionsCart} from "store/cartSlice";
+import {AppDispatch} from "store/store";
 
 export const CardItem: React.FC<Good> = ({
   img,

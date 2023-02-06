@@ -24,7 +24,7 @@ export function App() {
         <Row justify="center" align="middle">
           <Col span={20}>
             <Routes>
-              <Route path="/" element={<MainPage />} />
+              <Route path="/blabla-shop" element={<MainPage />} />
               <Route path="/registration" element={<RegistrationPage />} />
               <Route path={"/goods/:CardId"} element={<CardPage />} />
               <Route path="/category/:idCategory" element={<CategoryPage />} />
